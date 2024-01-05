@@ -2,7 +2,7 @@ function modificarDivCentral_Comentarios(){
     var title_ofc = document.getElementById('title_ofc');
     title_ofc.innerHTML = "Comentários";
     var poem_ofc = document.getElementById('poem_ofc');
-    poem_ofc.remove();
+    poem_ofc.innerHTML = '';
     var outrosComentarios = document.createElement('div');
     outrosComentarios.style.display = 'flex';
     outrosComentarios.style.position = 'absolute';
@@ -29,13 +29,19 @@ function modificarDivCentral_Comentarios(){
     divButtomInicio.style.position = 'absolute';
     divButtomInicio.style.left = '52vw';
     divButtomInicio.style.top = '85vh';
-    buttomInicio.innerHTML = "Inicio";
-    buttomInicio.onclick = "redirecionarParaOutroArquivo()";
-    function redirecionarParaOutroArquivo() {
-        window.location.href = '';
-    }
+    buttomInicio.innerHTML = "poema";
     divButtomInicio.appendChild(buttomInicio);
     document.body.appendChild(divButtomInicio);
     var buttomModificado = document.getElementById('modificar');
     buttomModificado.innerHTML = "Comentar";
+    function reverse(){
+        title_ofc.innerHTML = "Trecho de Os Lusíadas";
+        outrosComentarios.remove();
+        novoComentario.remove();
+        buttomInicio.remove();
+        divButtomInicio.remove();
+        buttomModificado.innerHTML = "Comentários";
+        poem_ofc.innerHTML = '"Já sobre as altas ondas Lusitana Ave rara se estende, e freme, e canta, Ave a quem vence o vento, e o mar, e a terra; Ave a quem fez a América Oceana, Ave a quem salva, engasta, e lustra a guerra; Ave cujo avançar cinge, e arrasa, Onde o Sol, claro em fúria, o deixa; e varre Esse grande oceano em que navegamos."';
+    }
+    buttomInicio.onclick = reverse;
 }
