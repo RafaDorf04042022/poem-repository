@@ -1,4 +1,7 @@
-function modificarDivCentral_Comentarios(){
+import { connection } from "./Apis_conexion.js";
+
+let obj_global;
+export function modificarDivCentral_Comentarios(){
     var title_ofc = document.getElementById('title_ofc');
     title_ofc.innerHTML = "Comentários";
     var poem_ofc = document.getElementById('poem_ofc');
@@ -35,13 +38,37 @@ function modificarDivCentral_Comentarios(){
     var buttomModificado = document.getElementById('modificar');
     buttomModificado.innerHTML = "Comentar";
     function reverse(){
-        title_ofc.innerHTML = "Trecho de Os Lusíadas";
+        title_ofc.innerHTML = obj_global.title;
         outrosComentarios.remove();
         novoComentario.remove();
         buttomInicio.remove();
         divButtomInicio.remove();
         buttomModificado.innerHTML = "Comentários";
-        poem_ofc.innerHTML = '"Já sobre as altas ondas Lusitana Ave rara se estende, e freme, e canta, Ave a quem vence o vento, e o mar, e a terra; Ave a quem fez a América Oceana, Ave a quem salva, engasta, e lustra a guerra; Ave cujo avançar cinge, e arrasa, Onde o Sol, claro em fúria, o deixa; e varre Esse grande oceano em que navegamos."';
+        poem_ofc.innerHTML = obj_global.poem;
+        var author_ofc = document.getElementById('name_ofc');
+        author_ofc.innerHTML = obj_global.author;
     }
     buttomInicio.onclick = reverse;
 }
+export function request_poem(){
+    let connection_obj = new connection;
+    let promisePoem = connection_obj.retornar_AllPoemas();
+    promisePoem.then(resultado =>{
+
+        let random = Math.floor(Math.random()*(resultado.length - 0)+0);
+        var obj = resultado[random];
+        var poem_ofc = document.getElementById('poem_ofc');
+        var author_ofc = document.getElementById('name_ofc');
+        var title_ofc = document.getElementById('title_ofc');
+        poem_ofc.innerHTML = obj.poem;
+        author_ofc.innerHTML = obj.author;
+        title_ofc.innerHTML = obj.title;
+        obj_global = obj;
+
+    }).catch(error => {
+        console.error("Ocorreu um erro: ", error);
+    });
+}
+window.onload = request_poem;
+window.modificarDivCentral_Comentarios = modificarDivCentral_Comentarios;
+window.request_poem = request_poem;

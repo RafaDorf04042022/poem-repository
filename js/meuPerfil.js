@@ -1,4 +1,6 @@
-function login(){
+import { connection } from "./Apis_conexion.js";
+import { setObj } from "./session.js";
+export function login(){
     var removeBntLogin = document.getElementById('position_bpd');
     var removeBntCadastro = document.getElementById('position_bpd_2');
     removeBntLogin.remove();
@@ -75,11 +77,8 @@ function login(){
     divButtomEntrar.appendChild(buttomEntrar);
     document.body.appendChild(divButtomEntrar);
     buttomEntrar.onclick = meuPerfil;
-    function meuPerfil(){
-        
 }
-}
-function cadastro(){
+export function cadastro(){
     var removeBntLogin = document.getElementById('position_bpd');
     var removeBntCadastro = document.getElementById('position_bpd_2');
     removeBntLogin.remove();
@@ -122,6 +121,9 @@ function cadastro(){
     var inputNome = document.createElement('input');
     var inputEMail = document.createElement('input');
     var inputSenha = document.createElement('input');
+    inputNome.id = "inputNome";
+    inputEMail.id = "inputEMail";
+    inputSenha.id = "inputSenha";
     inputNome.style.display = 'flex';
     inputNome.style.position = 'absolute';
     inputNome.style.width = '40vw';
@@ -155,4 +157,20 @@ function cadastro(){
     buttomEntrar.innerHTML = "Cadastrar";      
     divButtomEntrar.appendChild(buttomEntrar);
     document.body.appendChild(divButtomEntrar);
+    buttomEntrar.onclick = cadastrar;
+    function cadastrar() {
+        let connection_obj = new connection;
+        let name = document.getElementById("inputNome").value;
+        console.log(name);
+        let promiseUsuario = connection_obj.cadastrar_usuario(document.getElementById("inputNome").value, document.getElementById("inputSenha").value, document.getElementById("inputEMail").value);
+        console.log(promiseUsuario);
+        promiseUsuario.then(resultado => {
+            setObj(resultado);
+            console.log(resultado);
+        }).catch(error =>{
+            console.error("Deu um erro: ", error);
+        });
+    }
 }
+window.cadastro = cadastro;
+window.login = login;
