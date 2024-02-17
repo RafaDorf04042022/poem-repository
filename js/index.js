@@ -1,13 +1,12 @@
 import { connection } from "./Apis_conexion.js";
 
-let obj_global;
 export function modificarDivCentral_Comentarios(){
     var title_ofc = document.getElementById('title_ofc');
     title_ofc.innerHTML = "Comentários";
     var poem_ofc = document.getElementById('poem_ofc');
     poem_ofc.innerHTML = '';
     var outrosComentarios = document.createElement('div');
-    outrosComentarios.style.display = 'flex';
+    outrosComentarios.style.display = 'block';
     outrosComentarios.style.position = 'absolute';
     outrosComentarios.style.width = '94vw';
     outrosComentarios.style.height = '50vh';
@@ -15,8 +14,11 @@ export function modificarDivCentral_Comentarios(){
     outrosComentarios.style.top = '32vh';
     outrosComentarios.style.backgroundColor = 'white';
     outrosComentarios.style.borderRadius = '7px';
+    outrosComentarios.style.overflowY = 'scroll';
+    outrosComentarios.style.overflowX = 'hidden';
     document.body.appendChild(outrosComentarios);
     var novoComentario = document.createElement('input');
+    novoComentario.id = "inserirComentario";
     novoComentario.type = 'text';
     novoComentario.style.display = 'flex';
     novoComentario.style.position = 'absolute';
@@ -35,20 +37,59 @@ export function modificarDivCentral_Comentarios(){
     buttomInicio.innerHTML = "poema";
     divButtomInicio.appendChild(buttomInicio);
     document.body.appendChild(divButtomInicio);
-    var buttomModificado = document.getElementById('modificar');
+    var buttomModificado = document.createElement('button');
     buttomModificado.innerHTML = "Comentar";
+    var divBnt = document.getElementById('button_poem');
+    divBnt.appendChild(buttomModificado);
+    var buttonUsado = document.getElementById('modificar');
+    buttonUsado.style.display = "none";
+    let buttonNewPoem = document.getElementById('new_poem');
+    buttonNewPoem.style.display = 'none';
+
+    let obj_local_return = JSON.parse(localStorage.getItem('obj_global'));
     function reverse(){
-        title_ofc.innerHTML = obj_global.title;
+        title_ofc.innerHTML = obj_local_return.title;
         outrosComentarios.remove();
         novoComentario.remove();
         buttomInicio.remove();
         divButtomInicio.remove();
-        buttomModificado.innerHTML = "Comentários";
-        poem_ofc.innerHTML = obj_global.poem;
+        buttomModificado.style.display = "none";
+        buttonUsado.style.display = "block";
+        buttonNewPoem.style.display = 'flex';
+        poem_ofc.innerHTML = obj_local_return.poem;
         var author_ofc = document.getElementById('name_ofc');
-        author_ofc.innerHTML = obj_global.author;
+        author_ofc.innerHTML = obj_local_return.author;
     }
     buttomInicio.onclick = reverse;
+
+    let conect = new connection;
+    let promiseComents = conect.retornar_comentarios_byPoema(obj_local_return.title);
+    console.log(obj_local_return.title);
+    console.log(promiseComents);
+    promiseComents.then(resultado =>{
+        if (resultado.length>0){
+            for(let i=0; i<resultado.length; i++){
+                var divComentarios = document.createElement('div');
+                divComentarios.id = "divComentarios"+i;
+                divComentarios.innerHTML = resultado[i].autor + ": " + resultado[i].comentario;
+                divComentarios.style.display = "block";
+                divComentarios.style.position = "static";
+                divComentarios.style.margin = "4vh";
+                outrosComentarios.appendChild(divComentarios);
+            }
+        }
+    }).catch(error =>{
+        console.error("Ocorreu um erro: ", error);
+    });
+
+    buttomModificado.onclick = (comentar && reverse);
+    let obj_user = JSON.parse(localStorage.getItem('obj_local'));
+    function comentar(){
+        let promiseComentar = conect.cadastrar_comentario(document.getElementById('inserirComentario').value, obj_local_return.title, obj_user.nome);
+        promiseComentar.catch(error =>{
+            console.log("Deu um erro: ", error);
+        })
+    }
 }
 export function request_poem(){
     let connection_obj = new connection;
@@ -63,7 +104,7 @@ export function request_poem(){
         poem_ofc.innerHTML = obj.poem;
         author_ofc.innerHTML = obj.author;
         title_ofc.innerHTML = obj.title;
-        obj_global = obj;
+        localStorage.setItem('obj_global', JSON.stringify(obj));
 
     }).catch(error => {
         console.error("Ocorreu um erro: ", error);

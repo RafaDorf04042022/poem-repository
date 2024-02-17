@@ -91,3 +91,27 @@ button:hover{
     right: 0.1vw;
     top: 55vh;
 }
+.textArea{
+    display: flex;
+    position: absolute;
+    width: 93vw;
+    height: 55vh;
+    left: 1vw;
+    top: 1vh;
+    border: none;
+}
+.textTitle{
+    display: flex;
+    position: absolute;
+    width: 40vw;
+    height: 10vh;
+    left: 3vw;
+    top: 58vh;
+    border: none;
+}
+.buttonPostPoem{
+    display: flex;
+    position: absolute;
+    left: 76.5vw;
+    top:84vh;
+}
