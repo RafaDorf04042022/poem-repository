@@ -76,7 +76,7 @@ export class connection{
     }
     publicar_poem(poema, title, usuario){
         return new Promise((resolve, reject) => {
-            fetch("http://localhost:8080/poems",{
+            fetch("https://poem-api.onrender.com/poems",{
                         headers: {
                             "Accept": "application/json",
                             "Content-Type": "application/json"
@@ -99,7 +99,7 @@ export class connection{
         
     }
     retornar_poema(usuario, title){
-        fetch("http://localhost:8080/poems/"+usuario+"/"+title,{
+        fetch("https://poem-api.onrender.com/poems/"+usuario+"/"+title,{
             headers: {
                 "Accept": "application/json",
                 "Content-Type": "application/json"
@@ -111,7 +111,7 @@ export class connection{
     }
     retornar_poemas_byUsuario(usuario){
         return new Promise((resolve, reject)=>{
-            fetch("http://localhost:8080/poems/"+usuario,{
+            fetch("https://poem-api.onrender.com/poems/"+usuario,{
                 headers: {
                     "Accept": "application/json",
                     "Content-Type": "application/json"
@@ -130,7 +130,7 @@ export class connection{
     }
     retornar_AllPoemas(){
         return new Promise((resolve, reject) => {
-                fetch("http://localhost:8080/poems", {
+                fetch("https://poem-api.onrender.com/poems", {
                     headers: {
                         "Accept": "application/json",
                         "Content-Type": "application/json"
@@ -148,7 +148,7 @@ export class connection{
         
     }
     atualizar_poema(poema, usuario, title){
-        fetch("http://localhost:8080/poems/"+usuario+"/"+title,{
+        fetch("https://poem-api.onrender.com/poems/"+usuario+"/"+title,{
             headers: {
                 "Accept": "application/json",
                 "Content-Type": "application/json"
@@ -164,7 +164,7 @@ export class connection{
         .then(data => {return data})
     }
     delete_poema(){
-        fetch("http://localhost:8080/poems/"+usuario+"/"+title,{
+        fetch("https://poem-api.onrender.com/poems/"+usuario+"/"+title,{
             headers: {
                 "Accept": "application/json",
                 "Content-Type": "application/json"
