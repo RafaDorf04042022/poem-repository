@@ -8,7 +8,7 @@ export class connection{
     }
     cadastrar_usuario(usuario, senha, email){
         return new Promise((resolve, reject) => {
-            fetch("http://localhost:8080/usuarios",{
+            fetch("https://poem-api.onrender.com/usuarios",{
                 headers: {
                     "Accept": "application/json",
                     "Content-Type": "application/json"
@@ -32,7 +32,7 @@ export class connection{
     }
     retornar_usuario(usuario, senha){
         return new Promise((resolve, reject)=>{
-            fetch("http://localhost:8080/usuarios/"+usuario+"/"+senha,{
+            fetch("https://poem-api.onrender.com/usuarios/"+usuario+"/"+senha,{
                         headers: {
                             "Accept": "application/json",
                             "Content-Type": "application/json"
@@ -50,7 +50,7 @@ export class connection{
        
     }
     atualizar_usuario(usuario,senha,email){
-        fetch("http://localhost:8080/usuarios/"+usuario+"/"+senha,{
+        fetch("https://poem-api.onrender.com/usuarios/"+usuario+"/"+senha,{
             headers: {
                 "Accept": "application/json",
                 "Content-Type": "application/json"
@@ -66,7 +66,7 @@ export class connection{
         .then(data => {return data})
     }
     delete_usuario(){
-        fetch("http://localhost:8080/usuarios/"+usuario+"/"+senha,{
+        fetch("https://poem-api.onrender.com/usuarios/"+usuario+"/"+senha,{
             headers: {
                 "Accept": "application/json",
                 "Content-Type": "application/json"
@@ -174,7 +174,7 @@ export class connection{
     }
     retornar_comentarios_byPoema(title){
         return new Promise((resolve, reject)=>{
-            fetch("http://localhost:8080/coments/"+title,{
+            fetch("https://poem-api.onrender.com/coments/"+title,{
                 headers: {
                     "Accept": "application/json",
                     "Content-Type": "application/json"
@@ -193,7 +193,7 @@ export class connection{
     }
     cadastrar_comentario(comentario, title, autor){
         return new Promise((resolve, reject) => {
-            fetch("http://localhost:8080/coments",{
+            fetch("https://poem-api.onrender.com/coments",{
                 headers: {
                     "Accept": "application/json",
                     "Content-Type": "application/json"
