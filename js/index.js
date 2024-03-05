@@ -82,7 +82,7 @@ export function modificarDivCentral_Comentarios(){
         console.error("Ocorreu um erro: ", error);
     });
 
-    buttomModificado.onclick = (comentar && reverse);
+    buttomModificado.onclick = comentar;
     let obj_user = JSON.parse(localStorage.getItem('obj_local'));
     function comentar(){
         let promiseComentar = conect.cadastrar_comentario(document.getElementById('inserirComentario').value, obj_local_return.title, obj_user.nome);
