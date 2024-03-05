@@ -86,8 +86,10 @@ export function modificarDivCentral_Comentarios(){
     let obj_user = JSON.parse(localStorage.getItem('obj_local'));
     function comentar(){
         let promiseComentar = conect.cadastrar_comentario(document.getElementById('inserirComentario').value, obj_local_return.title, obj_user.nome);
-        promiseComentar.catch(error =>{
-            console.log("Deu um erro: ", error);
+        promiseComentar.then(resultado =>{
+            console.log(resultado);
+        }).catch(error =>{
+            console.error("Deu um erro: ", error);
         })
     }
 }
