@@ -1,6 +1,8 @@
 import { connection } from "./Apis_conexion.js";
 
 export function modificarDivCentral_Comentarios(){
+    var buttonEscondido = document.getElementById('button_perfil');
+    buttonEscondido.style.display = 'none';
     var title_ofc = document.getElementById('title_ofc');
     title_ofc.innerHTML = "Comentários";
     var poem_ofc = document.getElementById('poem_ofc');
