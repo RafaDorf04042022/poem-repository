@@ -20,17 +20,11 @@ export function chamarPoemas(){
     });
 }
 export function enviarPoema(){
-    location.reload();
-    let nome = document.getElementById("name_ofc");
-    nome.style.display = 'none';
-    let title = document.getElementById('title_ofc');
-    title.style.display = 'none';
-    let poem = document.getElementById('poem_ofc');
-    poem.style.display = 'none';
     let insertPoem = document.createElement('textarea');
     insertPoem.id = "poema";
     insertPoem.classList.add('textArea');
     let poemDiv = document.getElementById('poem_div');
+    poemDiv.removeChild(poemDiv.firstChild);
     let insertTitle = document.createElement('input');
     let button_new_poem = document.getElementById('new_poem');
     button_new_poem.style.display = 'none';
