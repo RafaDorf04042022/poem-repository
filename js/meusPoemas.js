@@ -20,6 +20,7 @@ export function chamarPoemas(){
     });
 }
 export function enviarPoema(){
+    location.reload();
     let nome = document.getElementById("name_ofc");
     nome.style.display = 'none';
     let title = document.getElementById('title_ofc');
