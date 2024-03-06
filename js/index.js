@@ -85,11 +85,28 @@ export function modificarDivCentral_Comentarios(){
     buttomModificado.onclick = comentar;
     let obj_user = JSON.parse(localStorage.getItem('obj_local'));
     function comentar(){
+        let promiseComents2 = conect.retornar_comentarios_byPoema(obj_local_return.title);
+        promiseComents2.then(resultado =>{
+            if (resultado.length>0){
+                for(let i=0; i<resultado.length; i++){
+                    var divComentarios = document.createElement('div');
+                    divComentarios.id = "divComentarios"+i;
+                    divComentarios.innerHTML = resultado[i].autor + ": " + resultado[i].comentario;
+                    divComentarios.style.display = "block";
+                    divComentarios.style.position = "static";
+                    divComentarios.style.margin = "4vh";
+                    outrosComentarios.appendChild(divComentarios);
+                }
+            }
+        }).catch(error =>{
+            console.error("Ocorreu um erro: ", error);
+        });
         let promiseComentar = conect.cadastrar_comentario(document.getElementById('inserirComentario').value, obj_local_return.title, obj_user.nome);
         promiseComentar.then(resultado =>{
             console.log(resultado);
         }).catch(error =>{
             console.error("Deu um erro: ", error);
+            alert("Comentário não enviado");
         })
     }
 }

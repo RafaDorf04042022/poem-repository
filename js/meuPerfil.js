@@ -70,7 +70,10 @@ export function login(){
         promisePoem.then(resultado => {
             localStorage.setItem("obj_local", JSON.stringify(resultado));
             window.location.href = "/meusPoemas.html";
-        }).catch(error =>{console.error("Ocorreu um erro:", error);});
+        }).catch(error =>{
+            console.error("Ocorreu um erro:", error);
+            alert("O login não foi efetuado");
+        });
     }
 }
 export function cadastro(){
@@ -167,6 +170,7 @@ export function cadastro(){
             window.location.href = "/meusPoemas.html";
         }).catch(error =>{
             console.error("Deu um erro: ", error);
+            alert("O cadastro não foi efetuado");
         })   
     }
 }
