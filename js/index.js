@@ -56,6 +56,7 @@ export function modificarDivCentral_Comentarios(){
         buttomInicio.remove();
         divButtomInicio.remove();
         buttomModificado.style.display = "none";
+        buttonEscondido.style.display = 'block';
         buttonUsado.style.display = "block";
         buttonNewPoem.style.display = 'flex';
         poem_ofc.innerHTML = obj_local_return.poem;
