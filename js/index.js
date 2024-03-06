@@ -95,6 +95,7 @@ export function modificarDivCentral_Comentarios(){
                     divComentarios.style.display = "block";
                     divComentarios.style.position = "static";
                     divComentarios.style.margin = "4vh";
+                    outrosComentarios.removeChild(outrosComentarios.firstChild);
                     outrosComentarios.appendChild(divComentarios);
                 }
             }
